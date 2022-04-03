@@ -1,2 +1,2 @@
-static void setborderpx(const Arg *arg);
+static void setborderpx(Bar *bar, const Arg *arg);
 

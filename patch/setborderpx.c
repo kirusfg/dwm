@@ -1,5 +1,5 @@
 void
-setborderpx(const Arg *arg)
+setborderpx(Bar *bar, const Arg *arg)
 {
 	Client *c;
 	int prev_borderpx = selmon->borderpx;
@@ -11,7 +11,6 @@ setborderpx(const Arg *arg)
 	else
 		selmon->borderpx += arg->i;
 
-	#if BAR_BORDER_PATCH
 	for (bar = selmon->bar; bar; bar = bar->next) {
 		bar->bh = bar->bh - 2 * bar->borderpx + 2 * selmon->borderpx;
 		bar->borderpx = selmon->borderpx;
@@ -19,7 +18,6 @@ setborderpx(const Arg *arg)
 	updatebarpos(selmon);
 	for (bar = selmon->bar; bar; bar = bar->next)
 		XMoveResizeWindow(dpy, bar->win, bar->bx, bar->by, bar->bw, bar->bh);
-	#endif // BAR_BORDER_PATCH
 
 	for (c = selmon->clients; c; c = c->next)
 	{
